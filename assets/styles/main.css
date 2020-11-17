@@ -1,3 +1,48 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
 
+html {
+  font-size: 10px; }
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-image: url("../img/bg-image.jpg");
+  background-size: cover;
+  height: 100vh;
+  background-position: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #333; }
+
+.card:not(:last-child) {
+  background-color: #faf4ff;
+  padding: 3.1rem;
+  margin-right: 3rem;
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.6); }
+
+.text-inp {
+  outline: none;
+  border: 0.03rem solid #ccc;
+  padding: 0.5rem;
+  font-size: 2rem; }
 
 /*# sourceMappingURL=main.css.map */
