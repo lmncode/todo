@@ -24,25 +24,120 @@ body {
           justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden; }
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
           align-items: center; }
+
+ul {
+  list-style: none; }
 
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: #333; }
 
-.card:not(:last-child) {
+.modal {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  opacity: 0;
+  height: 0; }
+  .modal .modal-bg {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1; }
+  .modal form {
+    background-color: #faf4ff;
+    padding: 2rem;
+    border-radius: 0.4rem; }
+
+.modal.active {
+  opacity: 1;
+  height: 100%; }
+
+.card {
   background-color: #faf4ff;
   padding: 3.1rem;
   margin-right: 3rem;
   border-radius: 0.3rem;
   -webkit-box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.6);
-          box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.6); }
+          box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.6);
+  height: 40rem;
+  width: 40rem;
+  overflow-y: hidden; }
 
 .text-inp {
   outline: none;
   border: 0.03rem solid #ccc;
   padding: 0.5rem;
-  font-size: 2rem; }
+  font-size: 2rem;
+  margin-right: 1.4rem; }
+
+.btn {
+  border: none;
+  border-radius: 0.3rem;
+  color: #faf4ff;
+  background-color: #10375c;
+  font-size: 2.5rem;
+  color: #faf4ff; }
+  .btn i {
+    padding: 0.8rem 2.2rem;
+    width: 100%;
+    height: 100%;
+    font-size: 1.6rem;
+    cursor: pointer; }
+
+.btn-icon {
+  color: #10375c;
+  background-color: #faf4ff;
+  margin-right: 0.8rem; }
+  .btn-icon i {
+    padding: 0;
+    cursor: pointer; }
+
+.list {
+  margin: 3rem 0;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.3rem;
+  color: #10375c;
+  font-size: 1.7rem;
+  overflow-y: scroll; }
+  .list li {
+    padding: 1rem 1.5rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    overflow-x: visible; }
+  .list li:not(:last-child) {
+    border-bottom: 0.1rem solid #ccc; }
 
 /*# sourceMappingURL=main.css.map */

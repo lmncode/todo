@@ -1,7 +1,10 @@
-.card:not(:last-child) {
+.card {
   background-color: $color-tertiary;
   padding: 3.1rem;
   margin-right: 3rem;
   border-radius: 0.3rem;
   box-shadow: 0 0 0.8rem rgba($color-black, 0.6);
+  height: 40rem;
+  width: 40rem;
+  overflow-y: hidden;
 }

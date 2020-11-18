@@ -4,20 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="./assets/styles/main.css" />
   </head>
 
   <body>
-    <div class="card">
-      <form>
-        <input type="text" class="text-inp new-item" />
-        <button type="submit" class="btn add-item">Add</button>
+    <div class="modal">
+      <div class="modal-bg"></div>
+      <form class="modal-form">
+        <input type="text" class="text-inp edit-inp" />
+        <button type="submit" class="btn btn-dark btn-edit">
+          <i class="far fa-edit"></i>
+        </button>
       </form>
-      <ul class="list"></ul>
     </div>
 
-    <div class="card"></div>
+    <div class="wrapper">
+      <div class="card">
+        <form>
+          <input type="text" class="text-inp new-item" />
+          <button type="submit" class="btn add-item">
+            <i class="fas fa-plus"></i>
+          </button>
+        </form>
+        <ul class="list uncompleted"></ul>
+      </div>
+
+      <div class="card"><ul class="list completed"></ul></div>
+    </div>
 
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/modal.js"></script>
   </body>
 </html>
