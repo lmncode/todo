@@ -59,7 +59,7 @@ function addToList(id, text, iscompleted) {
     e.dataTransfer.setData("item", e.target.id)
   );
   listItem.addEventListener("dragover", (e) => e.preventDefault());
-  listItem.addEventListener("drop", onCompleteTodo);
+  listItem.addEventListener("drop", onSortTodo);
   removeBtn.addEventListener("click", onRemoveItem);
   editBtn.addEventListener("click", () => openModal(text, id));
 
@@ -111,19 +111,17 @@ function onEditTodo(e) {
 }
 
 //complete todo
-function onCompleteTodo(e) {
-  (e) => {
-    const draggetItemId = parseInt(e.dataTransfer.getData("item").slice(1));
-    const droppedItemId = parseInt(e.target.id.slice(1));
-    todos.forEach((todo, index) => {
-      if (todo.id === draggetItemId) draggetItemIndex = index;
-      if (todo.id === droppedItemId) droppedItemIndex = index;
-    });
-    let copy = todos[draggetItemIndex];
-    todos[draggetItemIndex] = todos[droppedItemIndex];
-    todos[droppedItemIndex] = copy;
-    showTodoList();
-  };
+function onSortTodo(e) {
+  const draggetItemId = parseInt(e.dataTransfer.getData("item").slice(1));
+  const droppedItemId = parseInt(e.target.id.slice(1));
+  todos.forEach((todo, index) => {
+    if (todo.id === draggetItemId) draggetItemIndex = index;
+    if (todo.id === droppedItemId) droppedItemIndex = index;
+  });
+  let copy = todos[draggetItemIndex];
+  todos[draggetItemIndex] = todos[droppedItemIndex];
+  todos[droppedItemIndex] = copy;
+  showTodoList();
 }
 
 //show list
