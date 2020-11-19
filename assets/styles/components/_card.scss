@@ -8,6 +8,9 @@
   overflow-y: hidden;
   @include center;
   flex-direction: column;
+  form {
+    width: 100%;
+  }
 }
 
 .card:first-child {

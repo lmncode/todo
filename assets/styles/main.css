@@ -44,7 +44,6 @@ body {
           align-items: center; }
 
 form {
-  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,7 +103,8 @@ h2.count {
   .modal form {
     background-color: #faf4ff;
     padding: 2rem;
-    border-radius: 0.4rem; }
+    border-radius: 0.4rem;
+    width: 40rem; }
 
 .modal.active {
   opacity: 1;
@@ -133,6 +133,8 @@ h2.count {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
+  .card form {
+    width: 100%; }
 
 .card:first-child {
   margin-right: 3rem; }

@@ -1,7 +1,6 @@
 .modal {
   position: absolute;
   z-index: 1;
-
   width: 100%;
   @include center;
   transition: all 0.5s;
@@ -22,6 +21,7 @@
     background-color: $color-tertiary;
     padding: 2rem;
     border-radius: 0.4rem;
+    width: 40rem;
   }
 }
 .modal.active {
