@@ -1,3 +1,9 @@
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 *,
 *::after,
 *::before {
@@ -11,20 +17,23 @@ html {
 }
 
 body {
+  @include center;
   box-sizing: border-box;
-  background-image: url("../img/bg-image.jpg");
+  background-image: url("../img/bg-image-min.jpg");
   background-size: cover;
   height: 100vh;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   overflow: hidden;
+  text-align: center;
 }
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include center;
+}
+
+form {
+  width: 100%;
+  @include center;
 }
 ul {
   list-style: none;

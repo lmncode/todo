@@ -1,10 +1,15 @@
 .card {
   background-color: $color-tertiary;
   padding: 3.1rem;
-  margin-right: 3rem;
   border-radius: 0.3rem;
-  box-shadow: 0 0 0.8rem rgba($color-black, 0.6);
-  height: 40rem;
+  box-shadow: 0 0 0.8rem rgba($color-primary, 0.6);
+  height: 45rem;
   width: 40rem;
   overflow-y: hidden;
+  @include center;
+  flex-direction: column;
+}
+
+.card:first-child {
+  margin-right: 3rem;
 }

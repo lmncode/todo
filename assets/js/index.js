@@ -10,20 +10,23 @@ let todos = [
     isCompleted: true,
   },
 ];
-
 const addItemBtn = document.querySelector(".add-item");
 const newItemInp = document.querySelector(".new-item");
-const uncompletedList = document.querySelector(".uncompleted");
+const unCompletedList = document.querySelector(".uncompleted");
 const completedList = document.querySelector(".completed");
 const modal = document.querySelector(".modal");
 const modalBg = document.querySelector(".modal-bg");
 const editInp = document.querySelector(".edit-inp");
 const editBtn = document.querySelector(".btn-edit");
+const count = document.querySelector(".count");
 let listItemId;
+let draggetItemIndex;
+let droppedItemIndex;
 
 const generateId = () =>
   Math.floor(Math.random() * Math.floor(Math.random() * Date.now()));
 
+//add todo
 function addTodo(id) {
   const text = newItemInp.value;
   const newTodo = {
@@ -35,10 +38,8 @@ function addTodo(id) {
 }
 
 function addToList(id, text, iscompleted) {
-  console.log("xx");
   const listItem = document.createElement("LI");
   const content = document.createElement("p");
-
   const btnGroup = document.createElement("div");
   const editBtn = document.createElement("button");
   const removeBtn = document.createElement("button");
@@ -50,13 +51,17 @@ function addToList(id, text, iscompleted) {
   editIcon.setAttribute("class", "far fa-edit");
   removeIcon.setAttribute("class", "far fa-trash-alt");
   btnGroup.setAttribute("class", "btn-group");
-  content.setAttribute("id", `ti${id}`);
+  content.setAttribute("id", `t${id}`);
+  listItem.setAttribute("id", `i${id}`);
   listItem.setAttribute("draggable", "true");
-  // listItem.addEventListener("dragstart", dragTodo);
+
+  listItem.addEventListener("dragstart", (e) =>
+    e.dataTransfer.setData("item", e.target.id)
+  );
+  listItem.addEventListener("dragover", (e) => e.preventDefault());
+  listItem.addEventListener("drop", onCompleteTodo);
   removeBtn.addEventListener("click", onRemoveItem);
-  editBtn.addEventListener("click", () => {
-    openModal(text, id);
-  });
+  editBtn.addEventListener("click", () => openModal(text, id));
 
   content.textContent = text;
   removeBtn.appendChild(removeIcon);
@@ -68,76 +73,123 @@ function addToList(id, text, iscompleted) {
 
   iscompleted
     ? completedList.appendChild(listItem)
-    : uncompletedList.appendChild(listItem);
+    : unCompletedList.appendChild(listItem);
 }
 
-// function showList() {
-//   list.querySelectorAll("*").forEach((item) => item.remove());
-//   todos.map((todo) => {
-//     const listItem = document.createElement("LI");
-//     const removeBtn = document.createElement("button");
-
-//     listItem.textContent = newItemInp.value;
-//     listItem.setAttribute("id", `${todo.id}`);
-//     removeBtn.textContent = "X";
-
-//     removeBtn.addEventListener("click", onRemoveItem);
-//     listItem.appendChild(removeBtn);
-//     list.appendChild(listItem);
-//   });
-// }
-
-function onSubmitForm(e) {
+function onAddTodo(e) {
   e.preventDefault();
-  const id = generateId();
   if (!newItemInp.value) return;
-
-  addToList(id, newItemInp.value, false);
-
+  const id = generateId();
   addTodo(id);
-  //   showList();
+  showTodoList(id, newItemInp.value, false);
   newItemInp.value = "";
-  console.log(todos);
 }
 
-function removeTodo(id) {
-  console.log(id);
-  todos = todos.filter((todo, index) => todo.id != id);
-}
-
-function removeFromList(item) {
-  console.log(item);
-  item.remove();
-}
+//remove todo
+const removeTodo = (id) =>
+  (todos = todos.filter((todo) => todo.id != parseInt(id)));
 
 function onRemoveItem(e) {
-  const id = e.target.parentNode.parentNode.parentNode.id;
-  console.log(e.target.parentNode.parentNode.parentNode.parentNode);
+  e.preventDefault();
+  const id = e.target.parentNode.parentNode.parentNode.childNodes[0].id.slice(
+    1
+  );
   removeTodo(id);
-  removeFromList(e.target.parentNode.parentNode.parentNode);
+  showTodoList();
+}
+//edit todo
+const editTodo = (id, updatedText) =>
+  todos.forEach((todo) =>
+    todo.id === parseInt(id) ? (todo.text = updatedText) : null
+  );
+
+function onEditTodo(e) {
+  e.preventDefault();
+  editTodo(listItemId, editInp.value);
+  showTodoList();
+  closeModal();
 }
 
+//complete todo
+function onCompleteTodo(e) {
+  (e) => {
+    const draggetItemId = parseInt(e.dataTransfer.getData("item").slice(1));
+    const droppedItemId = parseInt(e.target.id.slice(1));
+    todos.forEach((todo, index) => {
+      if (todo.id === draggetItemId) draggetItemIndex = index;
+      if (todo.id === droppedItemId) droppedItemIndex = index;
+    });
+    let copy = todos[draggetItemIndex];
+    todos[draggetItemIndex] = todos[droppedItemIndex];
+    todos[droppedItemIndex] = copy;
+    showTodoList();
+  };
+}
+
+//show list
+function showTodoList() {
+  completedList.textContent = "";
+  unCompletedList.textContent = "";
+  todos.forEach((todo) => {
+    addToList(`${todo.id}`, todo.text, todo.isCompleted);
+  });
+  calcCount();
+}
+showTodoList();
+
+//calculate completed todos count
+function calcCount() {
+  const completedTodosCount = todos.filter((todo) => todo.isCompleted).length;
+  const unCompletedTodosCount = todos.filter((todo) => !todo.isCompleted)
+    .length;
+  count.textContent = `Completed todo ${completedTodosCount}/${todos.length}`;
+
+  const smileIcon = document.createElement("i");
+  smileIcon.setAttribute("class", "fas fa-grin-hearts emoji");
+
+  const sadIcon = document.createElement("i");
+  sadIcon.setAttribute("class", "fas fa-frown emoji");
+
+  if (!completedTodosCount && unCompletedTodosCount)
+    completedList.appendChild(sadIcon);
+  if (!unCompletedTodosCount && completedTodosCount)
+    unCompletedList.appendChild(smileIcon);
+}
+
+// open/close modal
 const openModal = (text, id) => {
   modal.className = "modal active";
-  //  editBtn.setAttribute("id", `${id}`);
   listItemId = id;
   editInp.focus();
   editInp.value = text;
 };
-
 const closeModal = () => (modal.className = "modal");
 
-addItemBtn.addEventListener("click", onSubmitForm);
+//events
+addItemBtn.addEventListener("click", onAddTodo);
 modalBg.addEventListener("click", closeModal);
+editBtn.addEventListener("click", onEditTodo);
+completedList.addEventListener("dragover", (e) => e.preventDefault());
+unCompletedList.addEventListener("dragover", (e) => e.preventDefault());
 
-editBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const updatedListItem = document.querySelector(`#ti${listItemId}`);
-  console.log(updatedListItem);
-  updatedListItem.textContent = editInp.value;
-  closeModal();
+//drag to right side
+completedList.addEventListener("drop", (e) => {
+  const id = e.dataTransfer.getData("item");
+  completedList.appendChild(document.querySelector(`#${id}`));
+  console.log(id.slice(1));
+  todos.forEach((todo) =>
+    todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = true) : null
+  );
+  showTodoList();
 });
 
-todos.forEach((todo) => {
-  addToList(`${todo.id}`, todo.text, todo.isCompleted);
+//drag to left side
+unCompletedList.addEventListener("drop", (e) => {
+  const id = e.dataTransfer.getData("item");
+  unCompletedList.appendChild(document.querySelector(`#${id}`));
+  console.log(id.slice(1));
+  todos.forEach((todo) =>
+    todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = false) : null
+  );
+  showTodoList();
 });
