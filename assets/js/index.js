@@ -163,31 +163,23 @@ const openModal = (text, id) => {
 };
 const closeModal = () => (modal.className = "modal");
 
+//drag/drop
+function drop(e, list) {
+  const id = e.dataTransfer.getData("item");
+  list.appendChild(document.querySelector(`#${id}`));
+  todos.forEach((todo) =>
+    todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = true) : null
+  );
+  showTodoList();
+}
+
 //events
 addItemBtn.addEventListener("click", onAddTodo);
 modalBg.addEventListener("click", closeModal);
 editBtn.addEventListener("click", onEditTodo);
 completedList.addEventListener("dragover", (e) => e.preventDefault());
 unCompletedList.addEventListener("dragover", (e) => e.preventDefault());
-
 //drag to right side
-completedList.addEventListener("drop", (e) => {
-  const id = e.dataTransfer.getData("item");
-  completedList.appendChild(document.querySelector(`#${id}`));
-  console.log(id.slice(1));
-  todos.forEach((todo) =>
-    todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = true) : null
-  );
-  showTodoList();
-});
-
+completedList.addEventListener("drop", (e) => drop(e, completedList));
 //drag to left side
-unCompletedList.addEventListener("drop", (e) => {
-  const id = e.dataTransfer.getData("item");
-  unCompletedList.appendChild(document.querySelector(`#${id}`));
-  console.log(id.slice(1));
-  todos.forEach((todo) =>
-    todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = false) : null
-  );
-  showTodoList();
-});
+unCompletedList.addEventListener("drop", (e) => drop(e, unCompletedList));
