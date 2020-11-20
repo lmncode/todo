@@ -15,13 +15,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: move;
+    cursor: pointer;
     overflow-x: hidden;
 
     p {
       word-break: break-all;
       white-space: normal;
       margin-right: 1.5rem;
+    }
+
+    p.line {
+      text-decoration: line-through;
     }
   }
   li:not(:last-child) {

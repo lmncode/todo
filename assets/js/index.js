@@ -52,6 +52,7 @@ function addToList(id, text, iscompleted) {
   removeIcon.setAttribute("class", "far fa-trash-alt");
   btnGroup.setAttribute("class", "btn-group");
   content.setAttribute("id", `t${id}`);
+  content.setAttribute("class", `${iscompleted ? "line" : ""}`);
   listItem.setAttribute("id", `i${id}`);
   listItem.setAttribute("draggable", "true");
 

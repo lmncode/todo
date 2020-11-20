@@ -243,12 +243,14 @@ h2.count {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    cursor: move;
+    cursor: pointer;
     overflow-x: hidden; }
     .list li p {
       word-break: break-all;
       white-space: normal;
       margin-right: 1.5rem; }
+    .list li p.line {
+      text-decoration: line-through; }
   .list li:not(:last-child) {
     border-bottom: 0.1rem solid #ccc; }
   .list i.emoji {
