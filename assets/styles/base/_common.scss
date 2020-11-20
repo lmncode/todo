@@ -37,3 +37,27 @@ form {
 ul {
   list-style: none;
 }
+
+@media (max-width: 860px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 760px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 660px) {
+  html {
+    font-size: 6px;
+  }
+}
+
+@media (max-width: 760px) {
+  .wrapper {
+    flex-direction: column;
+  }
+}

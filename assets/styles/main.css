@@ -57,6 +57,21 @@ form {
 ul {
   list-style: none; }
 
+@media (max-width: 860px) {
+  html {
+    font-size: 8px; } }
+@media (max-width: 760px) {
+  html {
+    font-size: 7px; } }
+@media (max-width: 660px) {
+  html {
+    font-size: 6px; } }
+@media (max-width: 760px) {
+  .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; } }
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -139,6 +154,16 @@ h2.count {
 .card:first-child {
   margin-right: 3rem; }
 
+@media (max-width: 760px) {
+  .card:first-child {
+    margin-right: 0;
+    margin-bottom: 3rem; } }
+@media (max-height: 668px) {
+  .card {
+    height: 38rem; } }
+@media (max-height: 600px) {
+  .card {
+    height: 35rem; } }
 .text-inp {
   outline: none;
   border: 0.03rem solid #ccc;
@@ -244,5 +269,9 @@ h2.count {
 
 .list.completed {
   height: 300px; }
+
+@media (max-width: 400px) {
+  .list {
+    height: 25rem; } }
 
 /*# sourceMappingURL=main.css.map */

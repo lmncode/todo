@@ -16,3 +16,22 @@
 .card:first-child {
   margin-right: 3rem;
 }
+
+@media (max-width: 760px) {
+  .card:first-child {
+    margin-right: 0;
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-height: 668px) {
+  .card {
+    height: 38rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .card {
+    height: 35rem;
+  }
+}
