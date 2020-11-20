@@ -164,9 +164,8 @@ const openModal = (text, id) => {
 const closeModal = () => (modal.className = "modal");
 
 //drag/drop
-function drop(e, list, c) {
+function drop(e, c) {
   const id = e.dataTransfer.getData("item");
-  list.appendChild(document.querySelector(`#${id}`));
   todos.forEach((todo) =>
     todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = c) : null
   );
@@ -180,8 +179,6 @@ editBtn.addEventListener("click", onEditTodo);
 completedList.addEventListener("dragover", (e) => e.preventDefault());
 unCompletedList.addEventListener("dragover", (e) => e.preventDefault());
 //drag to right side
-completedList.addEventListener("drop", (e) => drop(e, completedList, true));
+completedList.addEventListener("drop", (e) => drop(e, true));
 //drag to left side
-unCompletedList.addEventListener("drop", (e) =>
-  drop(e, unCompletedList, false)
-);
+unCompletedList.addEventListener("drop", (e) => drop(e, false));
