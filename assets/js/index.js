@@ -60,6 +60,7 @@ function addToList(id, text, iscompleted) {
   );
   listItem.addEventListener("dragover", (e) => e.preventDefault());
   listItem.addEventListener("drop", onSortTodo);
+  listItem.addEventListener("dblclick", onDoubleClick);
   removeBtn.addEventListener("click", onRemoveItem);
   editBtn.addEventListener("click", () => openModal(text, id));
 
@@ -163,11 +164,19 @@ const openModal = (text, id) => {
 };
 const closeModal = () => (modal.className = "modal");
 
-//drag/drop
+//drag/drop complete/uncomplete
 function drop(e, c) {
   const id = e.dataTransfer.getData("item");
   todos.forEach((todo) =>
     todo.id === parseInt(id.slice(1)) ? (todo.isCompleted = c) : null
+  );
+  showTodoList();
+}
+//doubleclick complete/uncomplete
+function onDoubleClick(e) {
+  const id = e.target.id.slice(1);
+  todos.forEach((todo) =>
+    todo.id === parseInt(id) ? (todo.isCompleted = !todo.isCompleted) : null
   );
   showTodoList();
 }
